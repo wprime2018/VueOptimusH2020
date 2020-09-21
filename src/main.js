@@ -13,6 +13,7 @@ Vue.config.productionTip = false
  */
 
  Vue.component('preloader-component', () => import('./components/Preloader'))
+ Vue.component('logo-component', () => import('./layouts/_partials/logo'));
 
 new Vue({
   render: h => h(BaseTemplate),

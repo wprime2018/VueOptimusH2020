@@ -4,12 +4,17 @@ import Vuex from 'vuex'
 import { state, mutations } from './default'
 
 import companies from './modules/companies'
+import cart from './modules/cart'
+import auth from './modules/auth/auth'
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
 
     modules: {
-      companies
+      companies,
+      cart,
+      auth
     },
     state,
     mutations

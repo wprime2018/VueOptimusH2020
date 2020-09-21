@@ -13,8 +13,9 @@ export default {
 
   categoriesCompanySelected:{
     data:[],
-    products: []
-      
+    products: {
+      data: []
+    } 
   },
   
 }
