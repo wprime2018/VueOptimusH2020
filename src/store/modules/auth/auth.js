@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { API_VERSION } from '@/configs/api'
+import { TOKEN_NAME } from '@/configs/api'
 
 export default {
 
@@ -12,7 +13,7 @@ export default {
   },
 
   mutations: {
-    SET_ME ( state, me) {
+    SET_ME (state, me) {
       state.me = me
 
       state.authenticated = true
@@ -36,10 +37,49 @@ export default {
   actions: {
 
     register({commit}, params) {
-      console.log(params)
       return axios.post(`${API_VERSION}/clients`, params)
-    }
+    },
 
+    login({commit, dispatch}, params) {
+      return axios.post(`${API_VERSION}/token`, params)
+              .then(response => {
+                const token = response.data.token 
+                localStorage.setItem(TOKEN_NAME, token)
+
+                dispatch('getMe')
+              })
+    },
+
+    getMe({commit}) {
+      const token = localStorage.getItem(TOKEN_NAME)
+      if (!token) return;
+
+      return axios.get(`${API_VERSION}/auth/me`, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+      })
+        .then(response => commit('SET_ME', response.data.data))
+        
+        .catch(error => localStorage.removeItem(TOKEN_NAME))
+    },
+
+    logout({commit}) {
+      const token = localStorage.getItem(TOKEN_NAME)
+      if (!token) return;
+
+      return axios.post(`${API_VERSION}/auth/logout`, {},  {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        commit('LOGOUT')
+        localStorage.removeItem(TOKEN_NAME)
+
+      })
+    },
+    
   }
 
 }
