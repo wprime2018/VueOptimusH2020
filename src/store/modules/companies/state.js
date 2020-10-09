@@ -7,8 +7,11 @@ export default {
     name: '',
     products: {
       data: []
+    },
+    tables: {
+      identify: '',
+      description: ''
     }
-
   },
 
   categoriesCompanySelected:{

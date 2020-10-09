@@ -38,12 +38,10 @@
       </div>
 
       <hr>
-      <div class="cart-price text-red">
-        Preço Total: <b>R$ {{totalCart}}</b>
-      </div>
+      <checkout />
     </div>
     <!-- end card body -->
-    <a href="" class="cart-finalizar">Finalizar</a>
+    
   </div>
   <!-- cart-->
 </div>
@@ -54,6 +52,7 @@ import {
   mapState,
   mapMutations
 } from 'vuex'
+import Checkout from './_partials/Checkout'
 
 export default {
   computed: {
@@ -79,5 +78,9 @@ export default {
       decrementQty: 'DECREMENT_QTY_PROD_CART'
     })
   },
+
+  components: {
+    Checkout
+  }
 }
 </script>

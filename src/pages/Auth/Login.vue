@@ -98,7 +98,7 @@ export default {
           this.resetForm()
 
           this.$router.push({
-            name: 'home'
+            name: 'myorders'
           })
 
           this.$vToastify.success("Autenticado com sucesso", 'Parabéns')

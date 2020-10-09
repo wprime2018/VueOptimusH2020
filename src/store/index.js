@@ -6,6 +6,7 @@ import { state, mutations } from './default'
 import companies from './modules/companies'
 import cart from './modules/cart'
 import auth from './modules/auth/auth'
+import orders from './modules/orders'
 
 Vue.use(Vuex)
 
@@ -14,7 +15,8 @@ const store = new Vuex.Store({
     modules: {
       companies,
       cart,
-      auth
+      auth,
+      orders
     },
     state,
     mutations

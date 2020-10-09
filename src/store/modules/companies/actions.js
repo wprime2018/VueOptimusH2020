@@ -15,6 +15,17 @@ export default {
                       .finally(commit('SET_PRELOADER', false))
   },
 
+  getCompanyByToken({commit}, token_company) {
+    
+    commit('SET_PRELOADER', true)
+    commit('SET_TEXT_PRELOADER', 'Carregando a empresa...')
+
+    return axios.get(`${API_VERSION}/${RESOURCE}/${token_company}`, {params: {token_company: token_company}} )
+                      .then(response => commit('SET_COMPANY_SELECTED', response.data))
+                      .finally(commit('SET_PRELOADER', false))
+    
+  },
+
   getCategoriesByCompany({commit}, token_company) {
     
     commit('SET_PRELOADER', true)
@@ -34,6 +45,18 @@ export default {
 
     return axios.get(`${API_VERSION}/products`, {params} )
                       .then(response => commit('SET_PRODUCTS_COMPANY', response.data))
+                      .finally(commit('SET_PRELOADER', false))
+    
+  },
+
+  getTableFromToken({commit}, params) {
+    
+    commit('SET_PRELOADER', true)
+    commit('SET_TEXT_PRELOADER', 'Carregando o ponto de atendimento...')
+
+    console.log(params)
+    return axios.get(`${API_VERSION}/tables/${params.table}`, {params: {token_company: params.token_company}})
+                      .then(response => commit('SET_TABLES_COMPANY', response.data))
                       .finally(commit('SET_PRELOADER', false))
     
   },

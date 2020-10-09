@@ -17,6 +17,9 @@
             <li class="nav-item">
               <router-link :to="{name: 'cart'}" class="nav-link">Carrinho</router-link>
             </li>
+            <li class="nav-item" v-if="authenticated">
+              <router-link :to="{name: 'myorders'}" class="nav-link">Meus Pedidos</router-link>
+            </li>
             <li class="nav-item nav-cart active">
               <router-link :to="{name: 'cart' }" class="nav-link">
                 <a href="carrinho.html"><i class="fa fa-shopping-cart"></i> ({{productsCart.length}})</a>
