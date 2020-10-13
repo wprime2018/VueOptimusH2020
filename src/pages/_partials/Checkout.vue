@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="cart-price text-red">
-      Preço Total: <b>R$ {{totalCart}}</b>
+      Preço Total: <b>R$ {{totalCart | formatprice}}</b>
     </div>
     <hr>
     <a href="" class="cart-finalizar" @click.prevent="openModalCheckout">Finalizar</a>
@@ -13,7 +13,8 @@
       <div class="px-md-5 my-4" v-else>
         <div class="col-12" v-if="me.name !== ''">
           <p> <strong>Total de Produtos:</strong> {{products.length}}</p>
-          <p> <strong>Total do pedido:</strong> R$ {{totalCart}}</p>
+          <p> <strong>Total do pedido:</strong> R$ {{totalCart | formatprice}}</p>
+          <p v-if="company.table.data.identify"> Mesa:<strong> {{company.table.data.name}}</strong> </p>
           <div class="form-group">
             <textarea name="comment" v-model="comment" class="form-control" cols="30" rows="3" placeholder="Comentário"></textarea>
           </div>
@@ -22,7 +23,8 @@
         <div v-else class="row">
           <div class="col-6">
             <p> <strong>Total de Produtos:</strong> {{products.length}}</p>
-            <p> <strong>Total do pedido:</strong> R$ {{totalCart}}</p>
+            <p> <strong>Total do pedido:</strong> R$ {{totalCart | formatprice}}</p>
+            <p v-if="company.table.data.identify"> Mesa:<strong> {{company.table.data.name}}</strong> </p>
             <div class="form-group">
               <textarea name="comment" v-model="comment" class="form-control" cols="30" rows="3" placeholder="Comentário"></textarea>
             </div>
@@ -87,8 +89,10 @@ export default {
         token_company: this.company.id,
         comment: this.comment,
         products: [...this.products],
-
       }
+
+      if (this.company.table.data.identify)
+        params.table = this.company.table.data.identify
 
       //this.$store.dispatch(action, params)
       this.$store.dispatch('createOrderAuthenticated', params)

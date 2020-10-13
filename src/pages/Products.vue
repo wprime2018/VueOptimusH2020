@@ -1,6 +1,10 @@
 <template>
 <div class="row">
   <h1 class="my-4 title-tenant text-center">{{company.name}}</h1>
+  <div class="row" v-if="company.table">
+    <h3 class="my-4 title-table text-center">{{company.table.data.name}}</h3>
+    <h4 class="my-4 title-table text-center">{{company.table.data.zona}}</h4>
+  </div>
   <div class="row">
     <!-- List Categories -->
     <div class="list-categories">
@@ -33,7 +37,7 @@
           <h4 class="card-title">
             <a href="#">{{products.title}}</a>
           </h4>
-          <h5>R$ {{products.preco}}</h5>
+          <h5>R$ {{products.preco | formatprice}}</h5>
           <p class="card-text">{{products.description}}</p>
         </div>
         <div class="card-footer card-footer-custom">
@@ -95,7 +99,9 @@ export default {
     ]),
 
     ...mapMutations({
-      addProdCart: 'ADD_PRODUCT_CART'
+      addProdCart: 'ADD_PRODUCT_CART',
+      removeTableCompany: 'REMOVE_TABLE_COMPANY',
+      removeCompanySelected: 'REMOVE_COMPANY_SELECTED'
     }),
 
     loadProducts() {

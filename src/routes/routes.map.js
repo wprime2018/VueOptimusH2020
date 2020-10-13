@@ -6,6 +6,7 @@ import Register from '@/pages/Auth/Register'
 import MyOrders from '@/pages/Auth/MyOrders'
 import DetailOrder from '@/pages/DetailOrder'
 import LoadTableCompany from '@/pages/LoadTableCompany'
+import PageNotFound from '@/pages/PageNotFound'
 
 const routes = [
   {
@@ -16,20 +17,26 @@ const routes = [
         path: '/:token_company/:token_table',
         component: LoadTableCompany,
         name: 'load.table.company',
-        props: true
+        props: true,
       },
 
       {
         path: '/pedido/:identify',
         component: DetailOrder,
         name: 'detail.order',
-        props: true
+        props: true,
+        meta: {
+          title: 'Pedido'
+        }
       },
 
       {
         path: '/carrinho',
         component: Cart,
-        name: 'cart'
+        name: 'cart',
+        meta: {
+          title: 'Carrinho'
+        }
       },
     
       {
@@ -42,7 +49,10 @@ const routes = [
       {
         path: '/',
         component: Home,
-        name: 'home'
+        name: 'home',
+        meta: {
+          title: 'Empresas'
+        }
       },
     ]
   },
@@ -68,6 +78,13 @@ const routes = [
         name: 'myorders'
       },
     ]
+  },
+  {
+    path: '*',
+    component: PageNotFound,
+    meta: {
+      title: 'Página não encontrada!'
+    }
   }
 
 

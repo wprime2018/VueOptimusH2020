@@ -9,7 +9,7 @@
       <div class="col-sm-6">
         <ul class="p-0">
           <li><b>Número:</b> {{ identify }}</li>
-          <li><b>Total:</b> R$ {{ order.total }}</li>
+          <li><b>Total:</b> R$ {{ order.total | formatprice}}</li>
           <li><b>Data:</b>{{ order.date }}</li>
           <li>
             <b>Status:</b>
@@ -58,9 +58,7 @@
           /></a>
           <div class="details-card-body">
             <h5>{{ product.title }}</h5>
-            <p>
-              <h3></h3> <b>R$: {{ product.preco }}</b>
-            </p>
+            <h3>R$: {{ product.preco | formatprice}}</h3> 
           </div>
         </div>
       </div>

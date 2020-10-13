@@ -48,6 +48,15 @@ import { mapActions, mapMutations, mapState } from 'vuex'
 
 export default {
   mounted() {
+    if (this.company) {
+      return this.$router.push({
+        name: 'products',
+        params: {
+          companyFlag: this.company.flag
+        }
+      })
+    }
+
     this.getCompanies()
                 .catch(response => this.$vToastify.error("Não conseguimos recuperar os registros."))
   },
